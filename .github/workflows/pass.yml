@@ -1,0 +1,16 @@
+name: Hello Success
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  always-pass:
+    runs-on: ubuntu-latest
+    steps:
+      - name: First success step
+        run: echo "✅ Step 1: Hello from hw1-p!"
+
+      - name: Second success step
+        run: echo "✅ Step 2: CI passed successfully!"
