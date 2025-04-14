@@ -1,0 +1,26 @@
+name: Diff Check Fail
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1: Say hello
+        run: echo "👋 Checking for differences..."
+
+      - name: Step 2: Print current branch
+        run: echo "🔍 Current branch is $GITHUB_REF"
+
+      - name: Checkout PR code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Compare with main branch
+        run: |
+          git fetch origin main
+          git diff --quiet origin/main || (echo "Branch is different from main. Failing on purpose." && exit 1)
